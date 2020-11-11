@@ -1,8 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { SupportedRegionsSelector } from './features/supportedRegions/supportedRegionSelector';
+import { getSupportedRegions } from './features/supportedRegions/supportedRegionThunk';
+
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+  const { supportedRegions, loading, errors } = useSelector(SupportedRegionsSelector);
+
+  console.log(supportedRegions, loading, errors);
+
+  useEffect(() => {
+    dispatch(getSupportedRegions());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
