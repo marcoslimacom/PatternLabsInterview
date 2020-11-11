@@ -21,7 +21,6 @@ const SupportedRegionSlice = createSlice({
     },
 
     setSupportedRegions: (state, { payload }: PayloadAction<SupportedRegionModel[]>) => {
-      debugger
       state.supportedRegions = payload;
     },
   },

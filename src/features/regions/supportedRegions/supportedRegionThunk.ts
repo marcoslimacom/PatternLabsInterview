@@ -1,16 +1,14 @@
 import axios from "axios";
-import { AppThunk } from "../../index";
+import { AppThunk } from "../../../index";
 import { setErrors, setLoading, setSupportedRegions } from "./supportedRegionSlice";
+import { baseURL } from './../../config';
 
 export const getSupportedRegions = (): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const baseURL: string = "https://api.quarantine.country/api/v1/regions";
-      // your apiKey should ideally be in a .env file
-      //const apiKey = "AIzaSyBDipCJKnoTuhByJP2pB4A7Fx4SAOXoy-k";
-
-      const res = await axios.get(`${baseURL}`);
+      const url: string = `${baseURL}/api/v1/regions`;
+      const res = await axios.get(`${url}`);
 
       dispatch(setLoading(false));
       dispatch(setSupportedRegions(res.data));

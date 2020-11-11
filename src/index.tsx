@@ -11,13 +11,13 @@ import theme from './theme';
 import App from "./Components/App/App";
 import reportWebVitals from "./reportWebVitals";
 
-import supportedRegionSliceReducer from "./features/supportedRegions/supportedRegionSlice";
-import SupportedRegionState from "./features/supportedRegions/supportedRegionState";
+import supportedRegionSliceReducer from "./features/regions/supportedRegions/supportedRegionSlice";
+import RegionState from "./features/regions/supportedRegions/supportedRegionState";
 
 // The AppThunk type will help us in writing type definitions for thunk actions
 export type AppThunk = ThunkAction<
   void,
-  SupportedRegionState,
+  RegionState,
   unknown,
   Action<string>
 >;

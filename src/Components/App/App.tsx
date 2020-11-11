@@ -4,8 +4,8 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { Button, Paper } from '@material-ui/core';
 
-import { SupportedRegionsSelector } from "./../../features/supportedRegions/supportedRegionSelector";
-import { getSupportedRegions } from "./../../features/supportedRegions/supportedRegionThunk";
+import { SupportedRegionsSelector } from "./../../features/regions/supportedRegions/supportedRegionSelector";
+import { getSupportedRegions } from "./../../features/regions/supportedRegions/supportedRegionThunk";
 
 import logo from './../../logo.svg';
 import "./App.css";
