@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { configureStore, Action } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 import "./index.css";
-import App from "./App";
+import theme from './theme';
+import App from "./Components/App/App";
 import reportWebVitals from "./reportWebVitals";
 
 import supportedRegionSliceReducer from "./features/supportedRegions/supportedRegionSlice";
-import SupportedRegionState from './features/supportedRegions/supportedRegionState';
+import SupportedRegionState from "./features/supportedRegions/supportedRegionState";
 
 // The AppThunk type will help us in writing type definitions for thunk actions
 export type AppThunk = ThunkAction<
@@ -33,7 +36,10 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
