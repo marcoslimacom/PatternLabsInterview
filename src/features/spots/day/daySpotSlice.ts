@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import DaySpotState from './daySpotState';
+import DaySpotState from "./daySpotState";
 
 const initialState: DaySpotState = {
-  daySpots: [],
+  daySpots: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,7 +21,7 @@ const DaySpotSlice = createSlice({
       state.errors = payload;
     },
 
-    setDaySpots: (state, { payload }: PayloadAction<object[]>) => {
+    setDaySpots: (state, { payload }: PayloadAction<any>) => {
       state.daySpots = payload;
     },
   },

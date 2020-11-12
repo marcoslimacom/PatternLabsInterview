@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import AllAvailableSummarySpotState from './allAvailableSummarySpotState';
+import AllAvailableSummarySpotState from "./allAvailableSummarySpotState";
 
 const initialState: AllAvailableSummarySpotState = {
-  allAvailableSummarySpots: [],
+  allAvailableSummarySpots: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,12 +21,16 @@ const AllAvailableSummarySpotSlice = createSlice({
       state.errors = payload;
     },
 
-    setAllAvailableSummarySpots: (state, { payload }: PayloadAction<object[]>) => {
+    setAllAvailableSummarySpots: (state, { payload }: PayloadAction<any>) => {
       state.allAvailableSummarySpots = payload;
     },
   },
 });
 
-export const { setLoading, setErrors, setAllAvailableSummarySpots } = AllAvailableSummarySpotSlice.actions;
+export const {
+  setLoading,
+  setErrors,
+  setAllAvailableSummarySpots,
+} = AllAvailableSummarySpotSlice.actions;
 
 export default AllAvailableSummarySpotSlice.reducer;

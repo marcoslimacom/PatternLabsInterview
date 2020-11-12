@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import LastestDataState from './lastestDataState';
+import LastestDataState from "./lastestDataState";
 
 const initialState: LastestDataState = {
-  lastestData: [],
+  lastestData: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,12 +21,16 @@ const LastestDataSlice = createSlice({
       state.errors = payload;
     },
 
-    setLastestData: (state, { payload }: PayloadAction<object[]>) => {
+    setLastestData: (state, { payload }: PayloadAction<any>) => {
       state.lastestData = payload;
     },
   },
 });
 
-export const { setLoading, setErrors, setLastestData } = LastestDataSlice.actions;
+export const {
+  setLoading,
+  setErrors,
+  setLastestData,
+} = LastestDataSlice.actions;
 
 export default LastestDataSlice.reducer;

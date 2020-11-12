@@ -1,5 +1,5 @@
 export default interface WeekSpotState {
-  weekSpots: object[];
+  weekSpots: any;
   loading: boolean;
   errors: string;
 }

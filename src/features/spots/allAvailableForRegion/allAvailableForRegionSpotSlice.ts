@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import AllAvailableForRegionSpotState from './allAvailableForRegionSpotState';
+import AllAvailableForRegionSpotState from "./allAvailableForRegionSpotState";
 
 const initialState: AllAvailableForRegionSpotState = {
-  allAvailableForRegionSpots: [],
+  allAvailableForRegionSpots: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,12 +21,16 @@ const AllAvailableForRegionSpotSlice = createSlice({
       state.errors = payload;
     },
 
-    setAllAvailableForRegionSpots: (state, { payload }: PayloadAction<object[]>) => {
+    setAllAvailableForRegionSpots: (state, { payload }: PayloadAction<any>) => {
       state.allAvailableForRegionSpots = payload;
     },
   },
 });
 
-export const { setLoading, setErrors, setAllAvailableForRegionSpots } = AllAvailableForRegionSpotSlice.actions;
+export const {
+  setLoading,
+  setErrors,
+  setAllAvailableForRegionSpots,
+} = AllAvailableForRegionSpotSlice.actions;
 
 export default AllAvailableForRegionSpotSlice.reducer;

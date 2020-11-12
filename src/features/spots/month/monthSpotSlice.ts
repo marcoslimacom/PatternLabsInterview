@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import MonthSpotState from './monthSpotState';
+import MonthSpotState from "./monthSpotState";
 
 const initialState: MonthSpotState = {
-  monthSpots: [],
+  monthSpots: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,7 +21,7 @@ const MonthSpotSlice = createSlice({
       state.errors = payload;
     },
 
-    setMonthSpots: (state, { payload }: PayloadAction<object[]>) => {
+    setMonthSpots: (state, { payload }: PayloadAction<any>) => {
       state.monthSpots = payload;
     },
   },

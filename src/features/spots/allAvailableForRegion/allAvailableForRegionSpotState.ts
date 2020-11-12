@@ -1,5 +1,5 @@
 export default interface AllAvailableForRegionSpotState {
-  allAvailableForRegionSpots: object[];
+  allAvailableForRegionSpots: any;
   loading: boolean;
   errors: string;
 }

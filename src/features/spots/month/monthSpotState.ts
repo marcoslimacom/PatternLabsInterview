@@ -1,5 +1,5 @@
 export default interface MonthSpotState {
-  monthSpots: object[];
+  monthSpots: any;
   loading: boolean;
   errors: string;
 }

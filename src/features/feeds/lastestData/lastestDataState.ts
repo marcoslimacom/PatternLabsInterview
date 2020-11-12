@@ -1,5 +1,5 @@
 export default interface LastestDataState {
-  lastestData: object[];
+  lastestData: any;
   loading: boolean;
   errors: string;
 }

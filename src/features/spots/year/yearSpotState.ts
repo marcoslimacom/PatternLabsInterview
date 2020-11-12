@@ -1,5 +1,5 @@
 export default interface YearSpotState {
-  yearSpots: object[];
+  yearSpots: any;
   loading: boolean;
   errors: string;
 }

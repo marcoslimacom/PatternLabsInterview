@@ -1,5 +1,5 @@
 export default interface RegionStatisticsState {
-  regionStatistics: object[];
+  regionStatistics: any;
   loading: boolean;
   errors: string;
 }

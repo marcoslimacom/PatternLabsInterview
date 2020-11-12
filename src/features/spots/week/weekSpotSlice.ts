@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import WeekSpotState from './weekSpotState';
+import WeekSpotState from "./weekSpotState";
 
 const initialState: WeekSpotState = {
-  weekSpots: [],
+  weekSpots: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,7 +21,7 @@ const WeekSpotSlice = createSlice({
       state.errors = payload;
     },
 
-    setWeekSpots: (state, { payload }: PayloadAction<object[]>) => {
+    setWeekSpots: (state, { payload }: PayloadAction<any>) => {
       state.weekSpots = payload;
     },
   },

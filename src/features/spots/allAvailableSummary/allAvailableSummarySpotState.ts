@@ -1,5 +1,5 @@
 export default interface AllAvailableSummarySpotState {
-  allAvailableSummarySpots: object[];
+  allAvailableSummarySpots: any;
   loading: boolean;
   errors: string;
 }

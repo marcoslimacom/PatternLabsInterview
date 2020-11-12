@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import SupportedRegionState from './supportedRegionState';
-import SupportedRegionModel from './supportedRegionModel';
+import SupportedRegionState from "./supportedRegionState";
 
 const initialState: SupportedRegionState = {
-  supportedRegions: [],
+  supportedRegions: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -20,12 +21,16 @@ const SupportedRegionSlice = createSlice({
       state.errors = payload;
     },
 
-    setSupportedRegions: (state, { payload }: PayloadAction<SupportedRegionModel[]>) => {
+    setSupportedRegions: (state, { payload }: PayloadAction<any>) => {
       state.supportedRegions = payload;
     },
   },
 });
 
-export const { setLoading, setErrors, setSupportedRegions } = SupportedRegionSlice.actions;
+export const {
+  setLoading,
+  setErrors,
+  setSupportedRegions,
+} = SupportedRegionSlice.actions;
 
 export default SupportedRegionSlice.reducer;

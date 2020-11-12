@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import RegionStatisticsState from './regionStatisticsState';
+import RegionStatisticsState from "./regionStatisticsState";
 
 const initialState: RegionStatisticsState = {
-  regionStatistics: [],
+  regionStatistics: {
+    data: {},
+  },
   loading: false,
   errors: "",
 };
@@ -19,12 +21,16 @@ const RegionStatisticsSlice = createSlice({
       state.errors = payload;
     },
 
-    setRegionStatistics: (state, { payload }: PayloadAction<object[]>) => {
+    setRegionStatistics: (state, { payload }: PayloadAction<any>) => {
       state.regionStatistics = payload;
     },
   },
 });
 
-export const { setLoading, setErrors, setRegionStatistics } = RegionStatisticsSlice.actions;
+export const {
+  setLoading,
+  setErrors,
+  setRegionStatistics,
+} = RegionStatisticsSlice.actions;
 
 export default RegionStatisticsSlice.reducer;
