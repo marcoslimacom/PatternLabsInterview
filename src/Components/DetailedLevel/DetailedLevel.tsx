@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
 
 import useStyles from "./DetailedLevelStyle";
+// import useAllAvailableForRegion from "./../../effects/useAllAvailableForRegion";
+import useRegionStatistics from "./../../effects/useRegionStatistics";
 
 type DetailedLevelProps = {
   regionName: any;
+  setTotalDataLbi: any;
+  setTodayDataLbi: any;
+  setLoadingStateLbi: any;
 };
 
 function getFullName(params: ValueGetterParams) {
@@ -35,8 +40,26 @@ const rows = [
   { id: 5, lastName: "Targaryen", firstName: "Daenerys" },
 ];
 
-export default function DetailedLevel({ regionName }: DetailedLevelProps) {
+export default function DetailedLevel({
+  regionName,
+  setTotalDataLbi,
+  setTodayDataLbi,
+  setLoadingStateLbi,
+}: DetailedLevelProps) {
   const classes = useStyles();
+
+  //const allAvailableForRegion = useAllAvailableForRegion(regionName);
+  const subAreas = false;
+  const regionStatistics = useRegionStatistics(regionName, subAreas);
+
+  useEffect(() => {
+    if (regionName.length > 0) {
+      console.log(regionStatistics);
+      setTotalDataLbi(regionStatistics.regionStatistics.data.summary);
+      setTodayDataLbi(regionStatistics.regionStatistics.data.change);
+      setLoadingStateLbi(regionStatistics.loading);
+    }
+  }, [regionName, regionStatistics, setLoadingStateLbi, setTodayDataLbi, setTotalDataLbi]);
 
   return (
     <div className={classes.root}>

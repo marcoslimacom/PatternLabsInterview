@@ -45,8 +45,6 @@ export default function LateralBoxInfo({
     );
   }, [classes]);
 
-  
-
   var summaryData = prepareLateralBoxData(summary);
   var changeData = prepareLateralBoxData(change);
 

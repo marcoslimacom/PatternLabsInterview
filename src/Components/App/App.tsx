@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,19 +13,19 @@ import DetailedLevel from "./../DetailedLevel/DetailedLevel";
 
 export default function App() {
   const [regionName, setRegionName] = useState("");
+  const [totalDataLbi, setTotalDataLbi] = useState({});
+  const [todayDataLbi, setTodayDataLbi] = useState({});
+  const [loadingStateLbi, setLoadingStateLbi] = useState(false);
+
   const lastestData = useLastestData();
 
-  // useEffect(() => {
-
-  //   if (regionName.length === 0) {
-  //     setTotalData(lastestData.lastestData.data.summary);
-  //     setTodayData(lastestData.lastestData.data.change);
-  //     setMainData(lastestData.lastestData.data.regions);
-  //     setLoadingState(lastestData.loading);
-  //   } else {
-
-  //   }
-  // }, [dispatch, lastestData, regionName, regionStatistics]);
+  useEffect(() => {
+    if (regionName.length === 0) {
+      setTotalDataLbi(lastestData.lastestData.data.summary);
+      setTodayDataLbi(lastestData.lastestData.data.change);
+      setLoadingStateLbi(lastestData.loading);
+    }
+  }, [lastestData, regionName]);
 
   const classes = useStyles();
 
@@ -50,9 +50,9 @@ export default function App() {
         <div className={classes.toolbar} />
 
         <LateralBoxInfo
-          summary={lastestData.lastestData.data.summary}
-          change={lastestData.lastestData.data.change}
-          loading={lastestData.loading}
+          summary={totalDataLbi}
+          change={todayDataLbi}
+          loading={loadingStateLbi}
           regionName={regionName || "World"}
         />
       </Drawer>
@@ -67,7 +67,14 @@ export default function App() {
           />
         )}
 
-        {regionName.length > 0 && <DetailedLevel regionName={regionName} />}
+        {regionName.length > 0 && (
+          <DetailedLevel
+            regionName={regionName}
+            setTotalDataLbi={setTotalDataLbi}
+            setTodayDataLbi={setTodayDataLbi}
+            setLoadingStateLbi={setLoadingStateLbi}
+          />
+        )}
       </main>
     </div>
   );
