@@ -11,11 +11,13 @@ import HighLevel from "./../HighLevel/HighLevel";
 import LateralBoxInfo from "./../LateralBoxInfo/LateralBoxInfo";
 import useLastestData from "../../effects/useLastestData";
 import DetailedLevel from "./../DetailedLevel/DetailedLevel";
+import Alert from "@material-ui/lab/Alert";
 
 export default function App() {
   const [regionName, setRegionName] = useState("");
   const [totalDataLbi, setTotalDataLbi] = useState({});
   const [todayDataLbi, setTodayDataLbi] = useState({});
+  const [errorDataLbi, setErrorDataLbi] = useState(null);
   const [loadingStateLbi, setLoadingStateLbi] = useState(false);
 
   const lastestData = useLastestData();
@@ -26,6 +28,7 @@ export default function App() {
       setTodayDataLbi(lastestData.lastestData.data.change);
       setLoadingStateLbi(lastestData.loading);
     }
+    setErrorDataLbi(lastestData.errors);
   }, [lastestData, regionName]);
 
   const onHomeIconClick = useCallback(() => {
@@ -71,7 +74,11 @@ export default function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        {regionName.length === 0 && (
+        {errorDataLbi && (
+          <Alert severity="error">{lastestData.errors.message}</Alert>
+        )}
+
+        {!errorDataLbi && regionName.length === 0 && (
           <HighLevel
             loading={lastestData.loading}
             regions={lastestData.lastestData.data.regions}

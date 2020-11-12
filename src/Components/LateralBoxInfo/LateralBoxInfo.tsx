@@ -24,7 +24,7 @@ export default function LateralBoxInfo({
 }: LateralBoxInfoProps) {
   const [skeleton, setSkeleton] = useState(<></>);
   const classes = useStyles();
-  
+
   useEffect(() => {
     setSkeleton(
       <>

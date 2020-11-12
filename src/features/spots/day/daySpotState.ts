@@ -1,5 +1,5 @@
 export default interface DaySpotState {
   daySpots: any;
   loading: boolean;
-  errors: string;
+  errors: any;
 }
