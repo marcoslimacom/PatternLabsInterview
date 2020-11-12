@@ -7,16 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import useStyles from "./HighLevelItemStyle";
-//import { prepareLateralBoxData } from "./utils";
 
 type HighLevelItemProps = {
   region?: any;
   isSkeleton: boolean;
+  setRegionName: any;
 };
 
 export default function HighLevelItem({
   region,
   isSkeleton,
+  setRegionName,
 }: HighLevelItemProps) {
   const [skeleton, setSkeleton] = useState(<></>);
   const classes = useStyles();
@@ -39,7 +40,11 @@ export default function HighLevelItem({
         </CardActions>
       </Card>
     );
-  }, []);
+  }, [classes]);
+
+  const onClickMore = () => {
+    setRegionName(region.name);
+  };
 
   return (
     <>
@@ -57,7 +62,11 @@ export default function HighLevelItem({
               </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-              <Button className={classes.buttonCardActions} size="small">
+              <Button
+                className={classes.buttonCardActions}
+                size="small"
+                onClick={onClickMore}
+              >
                 More
               </Button>
             </CardActions>

@@ -5,8 +5,6 @@ import { getLastestData } from "../features/feeds/lastestData/lastestDataThunk";
 import { LastestDataSelector } from './../features/feeds/lastestData/lastestDataSelector';
 import LastestDataState from './../features/feeds/lastestData/lastestDataState';
 
-
-
 export default function useLastestData() {
   const dispatch = useDispatch();
 

@@ -9,9 +9,14 @@ import HighLevelItem from "./../HighLevelItem/HighLevelItem";
 type HighLevelProps = {
   regions: Array<any>;
   loading: boolean;
+  setRegionName: any;
 };
 
-export default function HighLevel({ regions, loading }: HighLevelProps) {
+export default function HighLevel({
+  regions,
+  loading,
+  setRegionName,
+}: HighLevelProps) {
   const classes = useStyles();
 
   return (
@@ -21,9 +26,12 @@ export default function HighLevel({ regions, loading }: HighLevelProps) {
           <>
             {[0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16].map(
               (item) => (
-                <Grid item xs={3}>
+                <Grid item xs={3} key={item}>
                   <Paper className={classes.paper}>
-                    <HighLevelItem key={item} isSkeleton={true} />
+                    <HighLevelItem
+                      isSkeleton={true}
+                      setRegionName={setRegionName}
+                    />
                   </Paper>
                 </Grid>
               )
@@ -34,12 +42,12 @@ export default function HighLevel({ regions, loading }: HighLevelProps) {
         {!loading && (
           <>
             {Object.keys(regions).map((key, index) => (
-              <Grid item xs={3}>
+              <Grid item xs={3} key={index}>
                 <Paper className={classes.paper}>
                   <HighLevelItem
-                    key={index}
                     region={regions[key as any]}
                     isSkeleton={false}
+                    setRegionName={setRegionName}
                   />
                 </Paper>
               </Grid>

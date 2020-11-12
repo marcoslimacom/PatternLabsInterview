@@ -10,7 +10,7 @@ import useStyles from "./LateralBoxInfoStyle";
 import { prepareLateralBoxData } from "./utils";
 
 type LateralBoxInfoProps = {
-  region?: string;
+  regionName?: string;
   summary: any;
   change: any;
   loading: boolean;
@@ -19,7 +19,7 @@ type LateralBoxInfoProps = {
 export default function LateralBoxInfo({
   summary,
   change,
-  region,
+  regionName,
   loading,
 }: LateralBoxInfoProps) {
   const [skeleton, setSkeleton] = useState(<></>);
@@ -43,7 +43,7 @@ export default function LateralBoxInfo({
         ))}
       </>
     );
-  }, []);
+  }, [classes]);
 
   
 
@@ -57,7 +57,7 @@ export default function LateralBoxInfo({
       {!loading && (
         <>
           <ListItem>
-            <Typography variant="h5">{region} - Total</Typography>
+            <Typography variant="h5">{regionName} - Total</Typography>
           </ListItem>
           {summaryData.map((item, index) => (
             <div key={index}>
@@ -75,7 +75,7 @@ export default function LateralBoxInfo({
       {!loading && (
         <>
           <ListItem>
-            <Typography variant="h5">{region} - Today</Typography>
+            <Typography variant="h5">{regionName} - Today</Typography>
           </ListItem>
           {changeData.map((item, index) => (
             <div key={index}>
