@@ -23,7 +23,8 @@ export default function LateralBoxInfo({
   loading,
 }: LateralBoxInfoProps) {
   const [skeleton, setSkeleton] = useState(<></>);
-
+  const classes = useStyles();
+  
   useEffect(() => {
     setSkeleton(
       <>
@@ -44,7 +45,7 @@ export default function LateralBoxInfo({
     );
   }, []);
 
-  const classes = useStyles();
+  
 
   var summaryData = prepareLateralBoxData(summary);
   var changeData = prepareLateralBoxData(change);
@@ -74,7 +75,7 @@ export default function LateralBoxInfo({
       {!loading && (
         <>
           <ListItem>
-            <Typography variant="h5">{region} - Total</Typography>
+            <Typography variant="h5">{region} - Today</Typography>
           </ListItem>
           {changeData.map((item, index) => (
             <div key={index}>

@@ -45,7 +45,10 @@ export default function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <HighLevel />
+        <HighLevel
+          regions={lastestData.lastestData.data.regions}
+          loading={lastestData.loading}
+        />
       </main>
     </div>
   );

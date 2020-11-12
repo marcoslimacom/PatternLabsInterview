@@ -3,7 +3,7 @@ import LastestDataState from "./lastestDataState";
 
 const initialState: LastestDataState = {
   lastestData: {
-    data: {},
+    data: { regions: [] },
   },
   loading: false,
   errors: "",
