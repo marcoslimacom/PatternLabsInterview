@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
 
 import useStyles from "./AppStyle";
 import HighLevel from "./../HighLevel/HighLevel";
@@ -27,6 +28,10 @@ export default function App() {
     }
   }, [lastestData, regionName]);
 
+  const onHomeIconClick = useCallback(() => {
+    setRegionName("");
+  }, []);
+
   const classes = useStyles();
 
   return (
@@ -34,7 +39,14 @@ export default function App() {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          {regionName.length > 0 && (
+            <HomeTwoToneIcon
+              fontSize="large"
+              className={classes.homeIcon}
+              onClick={onHomeIconClick}
+            />
+          )}
+          <Typography variant="h6" className={classes.title} noWrap>
             {regionName || "World"} - Coronavirus Statistics
           </Typography>
         </Toolbar>

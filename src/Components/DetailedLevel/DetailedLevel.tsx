@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid";
+import { DataGrid } from "@material-ui/data-grid";
+import Typography from "@material-ui/core/Typography";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import useStyles from "./DetailedLevelStyle";
-// import useAllAvailableForRegion from "./../../effects/useAllAvailableForRegion";
+import useAllAvailableForRegion from "./../../effects/useAllAvailableForRegion";
 import useRegionStatistics from "./../../effects/useRegionStatistics";
+import { getColumnsData, prepareRowData, getSkeletonVariants } from "./utils";
 
 type DetailedLevelProps = {
   regionName: any;
@@ -12,33 +15,6 @@ type DetailedLevelProps = {
   setTodayDataLbi: any;
   setLoadingStateLbi: any;
 };
-
-function getFullName(params: ValueGetterParams) {
-  return `${params.getValue("firstName") || ""} ${
-    params.getValue("lastName") || ""
-  }`;
-}
-
-const columns: ColDef[] = [
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    width: 160,
-    valueGetter: getFullName,
-    sortComparator: (v1, v2, cellParams1, cellParams2) =>
-      getFullName(cellParams1).localeCompare(getFullName(cellParams2)),
-  },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon" },
-  { id: 2, lastName: "Lannister", firstName: "Cersei" },
-  { id: 3, lastName: "Lannister", firstName: "Jaime" },
-  { id: 4, lastName: "Stark", firstName: "Arya" },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys" },
-];
 
 export default function DetailedLevel({
   regionName,
@@ -48,26 +24,43 @@ export default function DetailedLevel({
 }: DetailedLevelProps) {
   const classes = useStyles();
 
-  //const allAvailableForRegion = useAllAvailableForRegion(regionName);
   const subAreas = false;
   const regionStatistics = useRegionStatistics(regionName, subAreas);
 
+  const allAvailableForRegion = useAllAvailableForRegion(regionName);
+  const columns = getColumnsData();
+  const rows = prepareRowData(
+    allAvailableForRegion.allAvailableForRegionSpots.data
+  );
+  const skeletonVariants = getSkeletonVariants();
+
   useEffect(() => {
-    if (regionName.length > 0) {
-      console.log(regionStatistics);
-      setTotalDataLbi(regionStatistics.regionStatistics.data.summary);
-      setTodayDataLbi(regionStatistics.regionStatistics.data.change);
-      setLoadingStateLbi(regionStatistics.loading);
-    }
-  }, [regionName, regionStatistics, setLoadingStateLbi, setTodayDataLbi, setTotalDataLbi]);
+    setTotalDataLbi(regionStatistics.regionStatistics.data.summary);
+    setTodayDataLbi(regionStatistics.regionStatistics.data.change);
+    setLoadingStateLbi(
+      regionStatistics.loading || allAvailableForRegion.loading
+    );
+  }, [
+    regionStatistics,
+    allAvailableForRegion,
+    setLoadingStateLbi,
+    setTodayDataLbi,
+    setTotalDataLbi,
+  ]);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <div style={{ width: "100%" }}>
-          <Grid item xs={12}>
-            <DataGrid rows={rows} columns={columns} />
-          </Grid>
+        <div style={{ height: 650, width: "100%" }}>
+          {allAvailableForRegion.loading &&
+            skeletonVariants.map((variant, index) => (
+              <Typography component="div" key={index} variant={variant}>
+                <Skeleton />
+              </Typography>
+            ))}
+          {!allAvailableForRegion.loading && rows.length > 0 && (
+            <DataGrid rows={rows} columns={columns} pageSize={10} />
+          )}
         </div>
       </Grid>
     </div>

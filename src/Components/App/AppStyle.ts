@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(3),
     },
+    homeIcon: {
+      verticalAlign: "middle",
+      cursor: "pointer",
+    },
+    title: {
+      margin: `${theme.spacing(1)}px 0 0 ${theme.spacing(1)}px`,
+    },
   })
 );
 
