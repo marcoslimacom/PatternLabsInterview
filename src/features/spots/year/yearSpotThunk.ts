@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { setErrors, setLoading, setYearSpots } from "./yearSpotSlice";
 import { baseURL } from "../../config";
+import YearSpotState from './yearSpotState';
+
+export type AppThunk = ThunkAction<
+  void,
+  YearSpotState,
+  unknown,
+  Action<string>
+>;
 
 export const getYearSpots = (region: string): AppThunk => {
   return async (dispatch) => {

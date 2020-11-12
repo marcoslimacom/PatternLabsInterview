@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { setErrors, setLoading, setWeekSpots } from "./weekSpotSlice";
 import { baseURL } from "../../config";
+import WeekSpotState from './weekSpotState';
+
+export type AppThunk = ThunkAction<
+  void,
+  WeekSpotState,
+  unknown,
+  Action<string>
+>;
 
 export const getWeekSpots = (region: string): AppThunk => {
   return async (dispatch) => {

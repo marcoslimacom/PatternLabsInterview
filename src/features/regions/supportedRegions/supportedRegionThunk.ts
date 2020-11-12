@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
-import { setErrors, setLoading, setSupportedRegions } from "./supportedRegionSlice";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { baseURL } from './../../config';
+import SupportedRegionState from './supportedRegionState';
+import { setErrors, setLoading, setSupportedRegions } from "./supportedRegionSlice";
+
+export type AppThunk = ThunkAction<
+  void,
+  SupportedRegionState,
+  unknown,
+  Action<string>
+>;
 
 export const getSupportedRegions = (): AppThunk => {
   return async (dispatch) => {

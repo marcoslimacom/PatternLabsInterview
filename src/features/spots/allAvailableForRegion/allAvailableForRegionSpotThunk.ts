@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { setErrors, setLoading, setAllAvailableForRegionSpots } from "./allAvailableForRegionSpotSlice";
 import { baseURL } from "../../config";
+import AllAvailableForRegionSpotState from './allAvailableForRegionSpotState';
+
+export type AppThunk = ThunkAction<
+  void,
+  AllAvailableForRegionSpotState,
+  unknown,
+  Action<string>
+>;
 
 export const getAllAvailableForRegionSpots = (region: string): AppThunk => {
   return async (dispatch) => {

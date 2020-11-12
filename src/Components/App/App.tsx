@@ -1,43 +1,83 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { Button, Paper } from '@material-ui/core';
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 
 import { SupportedRegionsSelector } from "./../../features/regions/supportedRegions/supportedRegionSelector";
 import { getSupportedRegions } from "./../../features/regions/supportedRegions/supportedRegionThunk";
+import useStyles from "./AppStyle";
+import HighLevel from './../HighLevel/HighLevel';
 
-import logo from './../../logo.svg';
-import "./App.css";
-
-function App() {
+export default function App() {
+  
   const dispatch = useDispatch();
   const { supportedRegions, loading, errors } = useSelector(
     SupportedRegionsSelector
   );
-
   console.log(supportedRegions, loading, errors);
-
   useEffect(() => {
     dispatch(getSupportedRegions());
   }, [dispatch]);
 
+  const classes = useStyles();
+
   return (
-    <Container maxWidth="sm" className="App">
-      <Paper>
-        <img src={logo} className="App-logo" alt="logo" />
-        <Typography variant="h4" component="h1" gutterBottom>
-          Coronavirus
-        </Typography>
-        <Button variant="contained" color="primary">
-          Screen 1
-        </Button>
-        <Button variant="contained" color="secondary">
-          Screen 2
-        </Button>
-      </Paper>
-    </Container>
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            World - Coronavirus Statistics
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {["All mail", "Trash", "Spam"].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+
+        <HighLevel />
+      </main>
+    </div>
   );
 }
-
-export default App;

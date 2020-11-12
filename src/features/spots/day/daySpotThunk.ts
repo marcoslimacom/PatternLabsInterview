@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { setErrors, setLoading, setDaySpots } from "./daySpotSlice";
 import { baseURL } from "../../config";
+import DaySpotState from './daySpotState';
+
+export type AppThunk = ThunkAction<
+  void,
+  DaySpotState,
+  unknown,
+  Action<string>
+>;
 
 export const getDaySpots = (region: string): AppThunk => {
   return async (dispatch) => {

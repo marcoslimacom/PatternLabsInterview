@@ -1,11 +1,21 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import {
   setErrors,
   setLoading,
   setRegionStatistics,
 } from "./regionStatisticsSlice";
 import { baseURL } from "../../config";
+import RegionStatisticsState from './regionStatisticsState';
+
+export type AppThunk = ThunkAction<
+  void,
+  RegionStatisticsState,
+  unknown,
+  Action<string>
+>;
 
 export const getRegionStatistics = (
   region: string,

@@ -1,7 +1,17 @@
 import axios from "axios";
-import { AppThunk } from "../../../index";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "@reduxjs/toolkit";
+
 import { setErrors, setLoading, setAllAvailableSummarySpots } from "./allAvailableSummarySpotSlice";
 import { baseURL } from "../../config";
+import AllAvailableSummarySpotState from './allAvailableSummarySpotState';
+
+export type AppThunk = ThunkAction<
+  void,
+  AllAvailableSummarySpotState,
+  unknown,
+  Action<string>
+>;
 
 export const getAllAvailableSummarySpots = (): AppThunk => {
   return async (dispatch) => {
