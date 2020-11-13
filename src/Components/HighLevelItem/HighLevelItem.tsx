@@ -7,17 +7,24 @@ import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import useStyles from "./HighLevelItemStyle";
+import { getAllBookmark, addBookmark } from "./../../utils/bookmarkStorage";
 
 type HighLevelItemProps = {
   region?: any;
   isSkeleton: boolean;
   setRegionName: any;
+  setPage: any;
+  bookmarks: any;
+  setBookmarks: any;
 };
 
 export default function HighLevelItem({
   region,
   isSkeleton,
   setRegionName,
+  setPage,
+  bookmarks,
+  setBookmarks,
 }: HighLevelItemProps) {
   const [skeleton, setSkeleton] = useState(<></>);
   const classes = useStyles();
@@ -44,6 +51,12 @@ export default function HighLevelItem({
 
   const onClickMore = () => {
     setRegionName(region.name);
+    setPage("DetailedLevel");
+  };
+
+  const onClickAddBookmark = (regionName: any) => {
+    addBookmark(regionName);
+    setBookmarks(getAllBookmark() as any);
   };
 
   return (
@@ -69,6 +82,27 @@ export default function HighLevelItem({
               >
                 More
               </Button>
+
+              {!bookmarks.some((element: any) => element === region.name) && (
+                <Button
+                  className={classes.buttonCardRemoveAction}
+                  size="small"
+                  color="secondary"
+                  onClick={() => onClickAddBookmark(region.name)}
+                >
+                  Add bookmark
+                </Button>
+              )}
+
+              {bookmarks.some((element: any) => element === region.name) && (
+                <Button
+                  className={classes.buttonCardBookmarkedAction}
+                  size="small"
+                  color="primary"
+                >
+                  Bookmarked
+                </Button>
+              )}
             </CardActions>
           </Card>
         </>

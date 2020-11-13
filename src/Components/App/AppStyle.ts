@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       margin: `${theme.spacing(1)}px 0 0 ${theme.spacing(1)}px`,
     },
+    bookmarkIcon: {
+      padding: theme.spacing(1),
+      position: "absolute",
+      right: theme.spacing(2),
+      cursor: "pointer",
+    },
   })
 );
 

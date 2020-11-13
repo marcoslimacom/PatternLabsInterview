@@ -5,6 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 
 import useStyles from "./AppStyle";
 import HighLevel from "./../HighLevel/HighLevel";
@@ -12,8 +13,10 @@ import LateralBoxInfo from "./../LateralBoxInfo/LateralBoxInfo";
 import useLastestData from "../../effects/useLastestData";
 import DetailedLevel from "./../DetailedLevel/DetailedLevel";
 import Alert from "@material-ui/lab/Alert";
+import BookmarkLevel from "../BookmarkLevel/BookmarkLevel";
 
 export default function App() {
+  const [page, setPage] = useState("");
   const [regionName, setRegionName] = useState("");
   const [totalDataLbi, setTotalDataLbi] = useState({});
   const [todayDataLbi, setTodayDataLbi] = useState({});
@@ -33,6 +36,11 @@ export default function App() {
 
   const onHomeIconClick = useCallback(() => {
     setRegionName("");
+    setPage("");
+  }, []);
+
+  const onBoormarkIconClick = useCallback(() => {
+    setPage("Bookmark");
   }, []);
 
   const classes = useStyles();
@@ -42,7 +50,7 @@ export default function App() {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          {regionName.length > 0 && (
+          {(page !== "") && (
             <HomeTwoToneIcon
               fontSize="large"
               className={classes.homeIcon}
@@ -50,8 +58,14 @@ export default function App() {
             />
           )}
           <Typography variant="h6" className={classes.title} noWrap>
-            {regionName || "World"} - Coronavirus Statistics
+            {page === "Bookmark" && "Bookmarks"}
+            {page !== "Bookmark" && (regionName || "World")} - Coronavirus
+            Statistics
           </Typography>
+
+          <div className={classes.bookmarkIcon} onClick={onBoormarkIconClick}>
+            <BookmarkIcon />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -71,6 +85,7 @@ export default function App() {
           regionName={regionName || "World"}
         />
       </Drawer>
+
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
@@ -78,21 +93,26 @@ export default function App() {
           <Alert severity="error">{lastestData.errors.message}</Alert>
         )}
 
-        {!errorDataLbi && regionName.length === 0 && (
+        {!errorDataLbi && page === "" && (
           <HighLevel
             loading={lastestData.loading}
             regions={lastestData.lastestData.data.regions}
             setRegionName={setRegionName}
+            setPage={setPage}
           />
         )}
 
-        {regionName.length > 0 && (
+        {page === "DetailedLevel" && regionName.length > 0 && (
           <DetailedLevel
             regionName={regionName}
             setTotalDataLbi={setTotalDataLbi}
             setTodayDataLbi={setTodayDataLbi}
             setLoadingStateLbi={setLoadingStateLbi}
           />
+        )}
+
+        {page === "Bookmark" && (
+          <BookmarkLevel setRegionName={setRegionName} setPage={setPage} />
         )}
       </main>
     </div>

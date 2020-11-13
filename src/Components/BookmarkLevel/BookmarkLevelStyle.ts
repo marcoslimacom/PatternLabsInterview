@@ -2,17 +2,13 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
-    bullet: {
-      display: "inline-block",
-      margin: "0 2px",
-      transform: "scale(0.8)",
+    root: {
+      flexGrow: 1,
     },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
+    paper: {
+      padding: 0,
+      textAlign: "center",
+      color: theme.palette.text.secondary,
     },
     cardActions: {
       paddingTop: 0,
@@ -22,11 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 0,
     },
     buttonCardRemoveAction: {
-      marginTop: 0,
-      position: "absolute",
-      right: theme.spacing(2),
-    },
-    buttonCardBookmarkedAction: {
       marginTop: 0,
       position: "absolute",
       right: theme.spacing(2),
