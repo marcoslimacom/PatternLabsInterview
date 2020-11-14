@@ -6,14 +6,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import HomeTwoToneIcon from "@material-ui/icons/HomeTwoTone";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
+import Alert from "@material-ui/lab/Alert";
 
 import useStyles from "./AppStyle";
-import HighLevel from "./../HighLevel/HighLevel";
-import LateralBoxInfo from "./../LateralBoxInfo/LateralBoxInfo";
 import useLastestData from "../../effects/useLastestData";
-import DetailedLevel from "./../DetailedLevel/DetailedLevel";
-import Alert from "@material-ui/lab/Alert";
-import BookmarkLevel from "../BookmarkLevel/BookmarkLevel";
+import LateralBoxInfoContainer from './../../Containers/LateralBoxInfo/LateralBoxInfoContainer';
+import HighLevelContainer from './../../Containers/HighLevel/HighLevelContainer';
+import DetailedLevelContainer from './../../Containers/DetailedLevel/DetailedLevelContainer';
+import BookmarkLevelContainer from './../../Containers/BookmarkLevel/BookmarkLevelContainer';
 
 export default function App() {
   const [page, setPage] = useState("");
@@ -78,7 +78,7 @@ export default function App() {
       >
         <div className={classes.toolbar} />
 
-        <LateralBoxInfo
+        <LateralBoxInfoContainer
           summary={totalDataLbi}
           change={todayDataLbi}
           loading={loadingStateLbi}
@@ -94,7 +94,7 @@ export default function App() {
         )}
 
         {!errorDataLbi && page === "" && (
-          <HighLevel
+          <HighLevelContainer
             loading={lastestData.loading}
             regions={lastestData.lastestData.data.regions}
             setRegionName={setRegionName}
@@ -103,7 +103,7 @@ export default function App() {
         )}
 
         {page === "DetailedLevel" && regionName.length > 0 && (
-          <DetailedLevel
+          <DetailedLevelContainer
             regionName={regionName}
             setTotalDataLbi={setTotalDataLbi}
             setTodayDataLbi={setTodayDataLbi}
@@ -112,7 +112,7 @@ export default function App() {
         )}
 
         {page === "Bookmark" && (
-          <BookmarkLevel setRegionName={setRegionName} setPage={setPage} />
+          <BookmarkLevelContainer setRegionName={setRegionName} setPage={setPage} />
         )}
       </main>
     </div>

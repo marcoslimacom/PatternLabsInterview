@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,61 +7,43 @@ import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import useStyles from "./HighLevelItemStyle";
-import { getAllBookmark, addBookmark } from "./../../utils/bookmarkStorage";
 
-type HighLevelItemProps = {
+type HighLevelItemComponentProps = {
   region?: any;
+  onClickMore: any;
+  bookmarks: Array<any>;
+  onClickAddBookmark: any;
   isSkeleton: boolean;
-  setRegionName: any;
-  setPage: any;
-  bookmarks: any;
-  setBookmarks: any;
 };
 
-export default function HighLevelItem({
+export default function HighLevelItemComponent({
   region,
-  isSkeleton,
-  setRegionName,
-  setPage,
+  onClickMore,
   bookmarks,
-  setBookmarks,
-}: HighLevelItemProps) {
-  const [skeleton, setSkeleton] = useState(<></>);
+  onClickAddBookmark,
+  isSkeleton,
+}: HighLevelItemComponentProps) {
   const classes = useStyles();
-
-  useEffect(() => {
-    setSkeleton(
-      <Card className={classes.root}>
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            <Skeleton />
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            <Skeleton />
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.cardActions}>
-          <Button className={classes.buttonCardActions} size="small">
-            <Skeleton width={80} />
-          </Button>
-        </CardActions>
-      </Card>
-    );
-  }, [classes]);
-
-  const onClickMore = () => {
-    setRegionName(region.name);
-    setPage("DetailedLevel");
-  };
-
-  const onClickAddBookmark = (regionName: any) => {
-    addBookmark(regionName);
-    setBookmarks(getAllBookmark() as any);
-  };
 
   return (
     <>
-      {isSkeleton && skeleton}
+      {isSkeleton && (
+        <Card className={classes.root}>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              <Skeleton />
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              <Skeleton />
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.cardActions}>
+            <Button className={classes.buttonCardActions} size="small">
+              <Skeleton width={80} />
+            </Button>
+          </CardActions>
+        </Card>
+      )}
 
       {!isSkeleton && (
         <>

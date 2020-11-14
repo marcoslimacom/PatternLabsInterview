@@ -1,30 +1,28 @@
-import React, { useState, useEffect }  from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import useStyles from "./HighLevelStyle";
-import HighLevelItem from "./../HighLevelItem/HighLevelItem";
-import { getAllBookmark } from './../../utils/bookmarkStorage';
+import HighLevelItemContainer from './../../Containers/HighLevelItem/HighLevelItemContainer';
 
-type HighLevelProps = {
-  regions: Array<any>;
-  loading: boolean;
+type HighLevelComponentProps = {
   setRegionName: any;
   setPage: any;
+  bookmarks: any;
+  setBookmarks: any;
+  regions: Array<any>;
+  loading: boolean;
 };
 
-export default function HighLevel({
-  regions,
-  loading,
+export default function HighLevelComponent({
   setRegionName,
   setPage,
-}: HighLevelProps) {
-  const [bookmarks, setBookmarks] = useState(null);
+  bookmarks,
+  setBookmarks,
+  regions,
+  loading,
+}: HighLevelComponentProps) {
   const classes = useStyles();
-
-  useEffect(() => {
-    setBookmarks(getAllBookmark() as any);
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -35,7 +33,7 @@ export default function HighLevel({
               (item) => (
                 <Grid item xs={3} key={item}>
                   <Paper className={classes.paper}>
-                    <HighLevelItem
+                    <HighLevelItemContainer
                       isSkeleton={true}
                       setRegionName={setRegionName}
                       setPage={setPage}
@@ -54,7 +52,7 @@ export default function HighLevel({
             {Object.keys(regions).map((key, index) => (
               <Grid item xs={3} key={index}>
                 <Paper className={classes.paper}>
-                  <HighLevelItem
+                  <HighLevelItemContainer
                     region={regions[key as any]}
                     isSkeleton={false}
                     setRegionName={setRegionName}
