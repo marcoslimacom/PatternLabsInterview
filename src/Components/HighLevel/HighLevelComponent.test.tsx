@@ -13,6 +13,8 @@ test("render HighLevelComponent test", () => {
   const setPage = () => {};
   const setBookmarks = () => {};
   const loading = false;
+  const setSearchText = () => {};
+  const searchText = "";
 
   //ACTION
   render(
@@ -23,6 +25,8 @@ test("render HighLevelComponent test", () => {
       setBookmarks={setBookmarks}
       regions={regions}
       loading={loading}
+      searchText={searchText}
+      setSearchText={setSearchText}
     />
   );
 
