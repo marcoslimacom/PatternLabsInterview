@@ -50,7 +50,7 @@ export default function HighLevelComponent({
         {!loading && bookmarks !== null && (
           <>
             {Object.keys(regions).map((key, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item xs={12} md={6} lg={3} key={index}>
                 <Paper className={classes.paper}>
                   <HighLevelItemContainer
                     region={regions[key as any]}
