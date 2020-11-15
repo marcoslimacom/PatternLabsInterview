@@ -91,12 +91,11 @@ export default function App() {
           )}
           <Typography variant="h6" className={classes.title} noWrap>
             {page === "Bookmark" && "Bookmarks"}
-            {page !== "Bookmark" && (regionName || "World")} - Coronavirus
-            Statistics
+            {page !== "Bookmark" && (regionName || "World")} - Statistics
           </Typography>
 
           <div className={classes.bookmarkIcon} onClick={onBoormarkIconClick}>
-            <BookmarkIcon />
+            <BookmarkIcon className={clsx(open && classes.hide)} />
           </div>
         </Toolbar>
       </AppBar>
