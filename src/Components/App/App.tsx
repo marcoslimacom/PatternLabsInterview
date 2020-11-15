@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-behaviorsbehaviorsbehaviorsimport clsx from "clsx";
+import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
