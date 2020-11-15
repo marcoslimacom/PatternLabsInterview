@@ -31,7 +31,7 @@ export default function BookmarkLevelComponent({
 
         {bookmarks !== null &&
           (bookmarks as any).map((bookmark: any, index: any) => (
-            <Grid item xs={3} key={index}>
+            <Grid item xs={12} md={6} lg={3} key={index}>
               <Paper className={classes.paper}>
                 <Card className={classes.root}>
                   <CardContent>
