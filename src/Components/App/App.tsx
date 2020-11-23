@@ -91,7 +91,7 @@ export default function App() {
           )}
           <Typography variant="h6" className={classes.title} noWrap>
             {page === "Bookmark" && "Bookmarks"}
-            {page !== "Bookmark" && (regionName || "World")} - Statistics
+            {page !== "Bookmark" && (regionName || "World")} - Statistics 22222
           </Typography>
 
           <div className={classes.bookmarkIcon} onClick={onBoormarkIconClick}>
